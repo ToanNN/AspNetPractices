@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ReviewCommandLineUtils": {
+      "commandName": "Project",
+      "commandLineArgs": "-m \"Van Beo Mui To\" -d \"Toan dep trai\" --importance \"low\" -a 12 -n \"Ngoc Kem\""
+    }
+  }
+}
