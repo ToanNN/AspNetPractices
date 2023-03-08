@@ -15,9 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningWorker", "CleaningW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostingAspNetAsWindowsService", "HostingAspNetAsWindowsService\HostingAspNetAsWindowsService.csproj", "{A501EB01-A3FE-41F9-911A-562AB496C495}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMinimalApi", "TodoApi\TodoMinimalApi.csproj", "{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoMinimalApi", "TodoApi\TodoMinimalApi.csproj", "{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrWithTypescript", "SignalrWithTypescript\SignalrWithTypescript.csproj", "{249E7251-5D96-4924-8488-AC26EF2F3FB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalrWithTypescript", "SignalrWithTypescript\SignalrWithTypescript.csproj", "{249E7251-5D96-4924-8488-AC26EF2F3FB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWithBlazor.Server", "SignalRWithBlazor\Server\SignalRWithBlazor.Server.csproj", "{42C53E3F-9A84-42A0-8046-BC5D45EE48FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWithBlazor.Client", "SignalRWithBlazor\Client\SignalRWithBlazor.Client.csproj", "{9E248764-964D-4DF7-B3B6-D20FFC9C62C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRWithBlazor.Shared", "SignalRWithBlazor\Shared\SignalRWithBlazor.Shared.csproj", "{70C2F117-60CF-435E-851D-610587C37988}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42C53E3F-9A84-42A0-8046-BC5D45EE48FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42C53E3F-9A84-42A0-8046-BC5D45EE48FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42C53E3F-9A84-42A0-8046-BC5D45EE48FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42C53E3F-9A84-42A0-8046-BC5D45EE48FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E248764-964D-4DF7-B3B6-D20FFC9C62C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E248764-964D-4DF7-B3B6-D20FFC9C62C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E248764-964D-4DF7-B3B6-D20FFC9C62C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E248764-964D-4DF7-B3B6-D20FFC9C62C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C2F117-60CF-435E-851D-610587C37988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C2F117-60CF-435E-851D-610587C37988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C2F117-60CF-435E-851D-610587C37988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C2F117-60CF-435E-851D-610587C37988}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
