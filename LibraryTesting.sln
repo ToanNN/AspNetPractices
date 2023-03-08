@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostingAspNetAsWindowsServi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoMinimalApi", "TodoApi\TodoMinimalApi.csproj", "{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalrWithTypescript", "SignalrWithTypescript\SignalrWithTypescript.csproj", "{249E7251-5D96-4924-8488-AC26EF2F3FB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1CC1C68-F688-4CD8-9CE5-8B5883BE72CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249E7251-5D96-4924-8488-AC26EF2F3FB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
