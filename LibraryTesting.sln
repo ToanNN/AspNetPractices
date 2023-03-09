@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRWithBlazor.Client", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRWithBlazor.Shared", "SignalRWithBlazor\Shared\SignalRWithBlazor.Shared.csproj", "{70C2F117-60CF-435E-851D-610587C37988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreater", "GrpcGreater\GrpcGreater.csproj", "{0A1A660D-5CA0-46CE-A978-CB6A9E19F396}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreater", "GrpcGreater\GrpcGreater.csproj", "{0A1A660D-5CA0-46CE-A978-CB6A9E19F396}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grpc", "Grpc", "{B88B9DB8-126C-471E-A708-9DE9B1E33EEB}"
 EndProject
@@ -37,12 +37,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Asp.netCoreFeatures", "Asp.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NlogAndCommandLineUtils", "NlogAndCommandLineUtils", "{2D78736C-9A18-4BEC-AF5C-9E8169E92C9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreeterClient", "GrpcGreeterClient\GrpcGreeterClient.csproj", "{CE463D38-C821-408F-8581-DF327C2FF2FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreeterClient", "GrpcGreeterClient\GrpcGreeterClient.csproj", "{CE463D38-C821-408F-8581-DF327C2FF2FA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{654CA39F-85BC-4933-8B8C-3E7E8F7351AD}"
 	ProjectSection(SolutionItems) = preProject
 		notes.md = notes.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspnetIdentityFramwork", "AspnetIdentityFramwork", "{E9DCFFA3-2730-4B6F-96DF-1FFFA5AD06E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

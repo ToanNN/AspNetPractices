@@ -93,6 +93,8 @@ app.Use(async (ctx, next) =>
     }
 });
 
+app.MapWhen(context => context.Request.Query.ContainsKey("branch"), HandleBranch);
+
 app.Run();
 
 
@@ -109,4 +111,14 @@ void PrintConfigurationSettings(WebApplicationBuilder webApplicationBuilder)
 
     Console.WriteLine($"Title: {positionOptions.Title} \n" +
                       $"Name: {positionOptions.Name}");
+}
+
+
+static void HandleBranch(IApplicationBuilder app)
+{
+    app.Run(async context =>
+    {
+        var branchVersion = context.Request.Query["branch"];
+        await context.Response.WriteAsync($"Branch used = {branchVersion}");
+    });
 }
