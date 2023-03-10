@@ -46,6 +46,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspnetIdentityFramwork", "AspnetIdentityFramwork", "{E9DCFFA3-2730-4B6F-96DF-1FFFA5AD06E9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{F0AC1762-9211-4F1A-980B-7B5B0D62E610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RateLimitingInAction", "RateLimitingInAction\RateLimitingInAction.csproj", "{B6D59887-D75F-46E8-843F-A350BE97BA7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +108,10 @@ Global
 		{CE463D38-C821-408F-8581-DF327C2FF2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE463D38-C821-408F-8581-DF327C2FF2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE463D38-C821-408F-8581-DF327C2FF2FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D59887-D75F-46E8-843F-A350BE97BA7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D59887-D75F-46E8-843F-A350BE97BA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D59887-D75F-46E8-843F-A350BE97BA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D59887-D75F-46E8-843F-A350BE97BA7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +129,7 @@ Global
 		{70C2F117-60CF-435E-851D-610587C37988} = {1D296D45-3406-4E45-B288-B37FC448D30E}
 		{0A1A660D-5CA0-46CE-A978-CB6A9E19F396} = {B88B9DB8-126C-471E-A708-9DE9B1E33EEB}
 		{CE463D38-C821-408F-8581-DF327C2FF2FA} = {B88B9DB8-126C-471E-A708-9DE9B1E33EEB}
+		{B6D59887-D75F-46E8-843F-A350BE97BA7D} = {F0AC1762-9211-4F1A-980B-7B5B0D62E610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F29CB1-138E-448C-B3DE-FFB25E7BB1C5}
