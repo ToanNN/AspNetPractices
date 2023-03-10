@@ -39,4 +39,16 @@ app.MapGet("/ratelimiting", () => Results.Ok($"Hello {GetTicks()}"))
     .RequireRateLimiting(ratePolicy);
 
 
+app.MapGet("/jwt", (HttpContext context) => $"Hello {GetUserEndPointMethod(context)}")
+    .RequireRateLimiting(RateLimitingPolicyNames.Jwt)
+    .RequireAuthorization();
+
+app.MapPost("/post", (HttpContext context) => $"Hello {GetUserEndPointMethod(context)}")
+    .RequireRateLimiting(RateLimitingPolicyNames.Jwt)
+    .RequireAuthorization();
+
 app.Run();
+
+static string GetUserEndPointMethod(HttpContext context) =>
+    $"Hello {context.User.Identity?.Name ?? "Anonymous"} " +
+    $"Endpoint:{context.Request.Path} Method: {context.Request.Method}";

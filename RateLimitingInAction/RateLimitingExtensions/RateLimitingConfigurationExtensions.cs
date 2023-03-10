@@ -1,7 +1,9 @@
 ﻿using System.Globalization;
 using System.Net;
 using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Primitives;
 
 namespace RateLimitingInAction.RateLimitingExtensions;
 
@@ -16,6 +18,8 @@ public static class RateLimitingConfigurationExtensions
         //Add Fixed Window Rate Limiter service
         webApplicationBuilder.Services.AddRateLimiter(options =>
             {
+                options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
                 options.AddFixedRateLimiter(RateLimitingPolicyNames.Fixed, rateLimitSettings)
                     .AddSlidingRateLimiter(RateLimitingPolicyNames.Sliding, rateLimitSettings)
                     .AddTokenRateLimiter(RateLimitingPolicyNames.TokenBucket, rateLimitSettings)
@@ -25,11 +29,50 @@ public static class RateLimitingConfigurationExtensions
 
                 options.AddRateLimiterPerUser(RateLimitingPolicyNames.PerUser, rateLimitSettings);
 
+                options.AddRateLimiterBasedOnJwtToken(RateLimitingPolicyNames.Jwt, rateLimitSettings);
+
                 //Vulnerable to DOS
                 options.AddGlobalRateLimiter(rateLimitSettings);
             }
         );
         return RateLimitingPolicyNames.Fixed;
+    }
+
+    private static RateLimiterOptions AddRateLimiterBasedOnJwtToken(this RateLimiterOptions limiterOptions,
+        string policyName,
+        RateLimitSettings rateLimitSettings)
+    {
+        limiterOptions.AddPolicy(RateLimitingPolicyNames.Jwt, httpContext =>
+        {
+            var accessToken = httpContext.Features.Get<IAuthenticateResultFeature>()?.AuthenticateResult?.Properties
+                .GetTokenValue("access_token")?.ToString() ?? string.Empty;
+
+            if (!StringValues.IsNullOrEmpty(accessToken))
+            {
+                return RateLimitPartition.GetTokenBucketLimiter(accessToken, _ => new TokenBucketRateLimiterOptions
+                {
+                    TokenLimit = rateLimitSettings.BucketTokenLimit,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = rateLimitSettings.QueueLimit,
+                    ReplenishmentPeriod = rateLimitSettings.ReplenishmentPeriod,
+                    AutoReplenishment = rateLimitSettings.AutoReplenishment,
+                    TokensPerPeriod = rateLimitSettings.TokensPerPeriod
+                });
+            }
+
+            return RateLimitPartition.GetTokenBucketLimiter("Anon", _ =>
+                new TokenBucketRateLimiterOptions
+                {
+                    TokenLimit = rateLimitSettings.TokenLimit,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = rateLimitSettings.QueueLimit,
+                    ReplenishmentPeriod = rateLimitSettings.ReplenishmentPeriod,
+                    TokensPerPeriod = rateLimitSettings.TokensPerPeriod,
+                    AutoReplenishment = true
+                });
+        });
+
+        return limiterOptions;
     }
 
     private static RateLimiterOptions AddGlobalRateLimiter(this RateLimiterOptions options,
@@ -43,7 +86,7 @@ public static class RateLimitingConfigurationExtensions
                 return RateLimitPartition.GetTokenBucketLimiter(remoteIpAddress!, _ =>
                     new TokenBucketRateLimiterOptions
                     {
-                        TokenLimit = rateLimitSettings.TokenLimit2,
+                        TokenLimit = rateLimitSettings.BucketTokenLimit,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                         QueueLimit = rateLimitSettings.QueueLimit,
                         ReplenishmentPeriod = rateLimitSettings.ReplenishmentPeriod,
@@ -63,7 +106,6 @@ public static class RateLimitingConfigurationExtensions
         //Add a new rate limiting policy
         options.AddPolicy(policyName, context =>
         {
-
             // Instead of extracting user names, we can extract tenant Id and get rate settings for each tenant to apply
             var userName = "Anonymous";
             if (context.User.Identity?.IsAuthenticated is true)
@@ -71,7 +113,7 @@ public static class RateLimitingConfigurationExtensions
                 userName = context.User.ToString()!;
             }
 
-            
+
             return RateLimitPartition.GetSlidingWindowLimiter(userName, _ => new SlidingWindowRateLimiterOptions
             {
                 PermitLimit = rateLimitSettings.PermitLimit,
