@@ -63,12 +63,15 @@ public static class RateLimitingConfigurationExtensions
         //Add a new rate limiting policy
         options.AddPolicy(policyName, context =>
         {
+
+            // Instead of extracting user names, we can extract tenant Id and get rate settings for each tenant to apply
             var userName = "Anonymous";
             if (context.User.Identity?.IsAuthenticated is true)
             {
                 userName = context.User.ToString()!;
             }
 
+            
             return RateLimitPartition.GetSlidingWindowLimiter(userName, _ => new SlidingWindowRateLimiterOptions
             {
                 PermitLimit = rateLimitSettings.PermitLimit,
