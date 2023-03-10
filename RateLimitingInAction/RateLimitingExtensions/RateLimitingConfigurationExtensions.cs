@@ -1,4 +1,6 @@
-﻿using System.Threading.RateLimiting;
+﻿using System.Globalization;
+using System.Net;
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace RateLimitingInAction.RateLimitingExtensions;
@@ -13,12 +15,94 @@ public static class RateLimitingConfigurationExtensions
 
         //Add Fixed Window Rate Limiter service
         webApplicationBuilder.Services.AddRateLimiter(options =>
-            options.AddFixedRateLimiter(RateLimitingPolicyNames.Fixed, rateLimitSettings)
-                .AddSlidingRateLimiter(RateLimitingPolicyNames.Sliding, rateLimitSettings)
-                .AddTokenRateLimiter(RateLimitingPolicyNames.TokenBucket, rateLimitSettings)
-                .AddConcurrencyRateLimiter(RateLimitingPolicyNames.Concurrency, rateLimitSettings)
+            {
+                options.AddFixedRateLimiter(RateLimitingPolicyNames.Fixed, rateLimitSettings)
+                    .AddSlidingRateLimiter(RateLimitingPolicyNames.Sliding, rateLimitSettings)
+                    .AddTokenRateLimiter(RateLimitingPolicyNames.TokenBucket, rateLimitSettings)
+                    .AddConcurrencyRateLimiter(RateLimitingPolicyNames.Concurrency, rateLimitSettings);
+
+                options.OnRejected = HandleOverLimitRequests;
+
+                options.AddRateLimiterPerUser(RateLimitingPolicyNames.PerUser, rateLimitSettings);
+
+                //Vulnerable to DOS
+                options.AddGlobalRateLimiter(rateLimitSettings);
+            }
         );
         return RateLimitingPolicyNames.Fixed;
+    }
+
+    private static RateLimiterOptions AddGlobalRateLimiter(this RateLimiterOptions options,
+        RateLimitSettings rateLimitSettings)
+    {
+        options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, IPAddress>(context =>
+        {
+            IPAddress? remoteIpAddress = context.Connection.RemoteIpAddress;
+            if (!IPAddress.IsLoopback(remoteIpAddress!))
+            {
+                return RateLimitPartition.GetTokenBucketLimiter(remoteIpAddress!, _ =>
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = rateLimitSettings.TokenLimit2,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = rateLimitSettings.QueueLimit,
+                        ReplenishmentPeriod = rateLimitSettings.ReplenishmentPeriod,
+                        TokensPerPeriod = rateLimitSettings.TokensPerPeriod,
+                        AutoReplenishment = rateLimitSettings.AutoReplenishment
+                    });
+            }
+
+            return RateLimitPartition.GetNoLimiter(IPAddress.Loopback);
+        });
+    }
+
+    private static RateLimiterOptions AddRateLimiterPerUser(this RateLimiterOptions options, string policyName,
+        RateLimitSettings rateLimitSettings)
+    {
+        //Add a new rate limiting policy
+        options.AddPolicy(policyName, context =>
+        {
+            var userName = "Anonymous";
+            if (context.User.Identity?.IsAuthenticated is true)
+            {
+                userName = context.User.ToString()!;
+            }
+
+            return RateLimitPartition.GetSlidingWindowLimiter(userName, _ => new SlidingWindowRateLimiterOptions
+            {
+                PermitLimit = rateLimitSettings.PermitLimit,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                Window = rateLimitSettings.Window,
+                SegmentsPerWindow = rateLimitSettings.SegmentsPerWindow
+            });
+        });
+        return options;
+    }
+
+
+    private static ValueTask HandleOverLimitRequests(OnRejectedContext context, CancellationToken cancellationToken)
+    {
+        // Has retry header
+        if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out var retryAfter))
+        {
+            context.HttpContext.Response.Headers.RetryAfter =
+                ((int)retryAfter.TotalSeconds).ToString(NumberFormatInfo.InvariantInfo);
+        }
+
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+
+        context.HttpContext.RequestServices.GetService<ILoggerFactory>()?
+            .CreateLogger("Microsoft.AspNetCore.RateLimitingMiddleware")
+            .LogWarning("OnRejected: {GetUserEndPoint}", GetUserEndPoint(context.HttpContext));
+
+
+        return ValueTask.CompletedTask;
+    }
+
+    private static string GetUserEndPoint(HttpContext context)
+    {
+        return
+            $"User {context.User.Identity?.Name ?? "Anonymous"} endpoint: {context.Request.Path} {context.Connection.RemoteIpAddress} ";
     }
 
     private static RateLimiterOptions AddConcurrencyRateLimiter(this RateLimiterOptions options, string policyName,

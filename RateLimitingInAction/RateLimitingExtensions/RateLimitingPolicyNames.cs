@@ -6,4 +6,5 @@ public static class RateLimitingPolicyNames
     public const string Sliding = "Sliding";
     public const string TokenBucket = "TokenBucket";
     public const string Concurrency = "Concurrency";
+    public static string PerUser = "PerUser";
 }
