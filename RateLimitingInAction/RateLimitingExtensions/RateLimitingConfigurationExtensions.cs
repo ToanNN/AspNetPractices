@@ -54,6 +54,7 @@ public static class RateLimitingConfigurationExtensions
 
             return RateLimitPartition.GetNoLimiter(IPAddress.Loopback);
         });
+        return options;
     }
 
     private static RateLimiterOptions AddRateLimiterPerUser(this RateLimiterOptions options, string policyName,
