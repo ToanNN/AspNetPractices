@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddResponseCaching();
 
 // Add services to the container.
 
@@ -32,5 +33,10 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Must be called before use Response Caching
+app.UseCors();
+
+app.UseResponseCaching();
 
 app.Run();
