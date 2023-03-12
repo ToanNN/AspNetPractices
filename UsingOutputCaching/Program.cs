@@ -1,7 +1,17 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddResponseCaching();
+builder.Services.AddResponseCaching(options =>
+{
+    // 64kb default 64Mb
+    options.MaximumBodySize = 64*1024;
+
+    //Default 100 Mb
+    options.SizeLimit = 100*1024;
+    //Default false
+    options.UseCaseSensitivePaths = true;
+});
 
 // Add services to the container.
 
@@ -38,5 +48,17 @@ app.MapControllers();
 app.UseCors();
 
 app.UseResponseCaching();
+
+app.Use(async (ctx, next) =>
+{
+    ctx.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+    {
+        Public = true,
+        MaxAge = TimeSpan.FromSeconds(10)
+    };
+
+    ctx.Response.Headers[HeaderNames.Vary] = new[] { "Accept-Encoding" };
+    await next();
+});
 
 app.Run();
