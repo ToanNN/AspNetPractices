@@ -1,5 +1,8 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.Net.Http.Headers;
+using UsingOutputCaching.Middleware;
+using UsingOutputCaching.Middleware.ScopeServices;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddResponseCaching(options =>
@@ -12,6 +15,9 @@ builder.Services.AddResponseCaching(options =>
     //Default false
     options.UseCaseSensitivePaths = true;
 });
+
+// This service will be shared with middleware InvokeAsync
+builder.Services.AddScoped<IMessageWriter, ConsoleWriter>();
 
 // Add services to the container.
 
@@ -49,6 +55,23 @@ app.UseCors();
 
 app.UseResponseCaching();
 
+//Create an inline middleware
+// we should prefer Use(HttpContext, RequestDelegate)
+//app.Use(async (context, next) =>
+//{
+//    var cultureQuery = context.Request.Query["culture"];
+//    if (!string.IsNullOrWhiteSpace(cultureQuery))
+//    {
+//        var culture = new CultureInfo(cultureQuery);
+//        CultureInfo.CurrentCulture = culture;
+//        CultureInfo.CurrentUICulture = culture;
+//    }
+
+//    await next(context);
+
+//});
+
+
 app.Use(async (ctx, next) =>
 {
     ctx.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
@@ -61,4 +84,6 @@ app.Use(async (ctx, next) =>
     await next();
 });
 
+// Add the middleware to the app
+app.UseRequestCulture();
 app.Run();
