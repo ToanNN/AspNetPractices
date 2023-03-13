@@ -28,6 +28,7 @@ public class RequestCultureMiddleware
 
     public async Task InvokeAsync(HttpContext context, IMessageWriter messageWriter)
     {
+        messageWriter.Write(DateTime.Now.Ticks.ToString());
         var cultureQuery = context.Request.Query["culture"];
         if (!string.IsNullOrWhiteSpace(cultureQuery))
         {
