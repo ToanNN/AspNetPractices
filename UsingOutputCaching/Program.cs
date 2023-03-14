@@ -16,9 +16,11 @@ builder.Services.AddResponseCaching(options =>
     options.UseCaseSensitivePaths = true;
 });
 
+// Add decompression services to to WebhostBuilder
+builder.Services.AddRequestDecompression();
+
 // This service will be shared with middleware InvokeAsync
 builder.Services.AddScoped<IMessageWriter, ConsoleWriter>();
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -86,4 +88,9 @@ app.Use(async (ctx, next) =>
 
 // Add the middleware to the app
 app.UseRequestCulture();
+
+// Add the request decompression middleware
+// Request decompression uses "Content-Encoding" header to determine a decoder
+// available values are "br", "deflate", and "gzip"
+app.UseRequestDecompression();
 app.Run();
