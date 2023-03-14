@@ -1,6 +1,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.Net.Http.Headers;
+using UsingOutputCaching.FactoryBasedMiddlewareActivation;
 using UsingOutputCaching.Middleware;
 using UsingOutputCaching.Middleware.ScopeServices;
 
@@ -36,6 +37,12 @@ builder.Services.AddAuthorization(options =>
     // By default, all incoming requests will be authorized according to the default policy.
     options.FallbackPolicy = options.DefaultPolicy;
 });
+
+// Once instance per injection
+builder.Services.AddTransient<FactoryActivatedMiddleware>();
+
+
+//******************************************************************//
 
 var app = builder.Build();
 
@@ -93,4 +100,9 @@ app.UseRequestCulture();
 // Request decompression uses "Content-Encoding" header to determine a decoder
 // available values are "br", "deflate", and "gzip"
 app.UseRequestDecompression();
+
+//Register middleware with the request pipeline
+app.UseConventionalMiddleware();
+app.UseFactoryBasedMiddleware();
+
 app.Run();

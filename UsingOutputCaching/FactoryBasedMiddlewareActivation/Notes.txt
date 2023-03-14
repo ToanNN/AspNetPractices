@@ -1,0 +1,8 @@
+IMiddlewareFactory activates an IMiddleware per client request, so scoped and transient services can be injected and used.
+
+The logic:
+
+UseMiddleware extension methods check if a middleware's registered type implements IMiddleware. 
+If it does, the IMiddlewareFactory instance registered in the container is used to resolve the IMiddleware implementation 
+instead of using the convention-based middleware activation logic. 
+The middleware is registered as a scoped or transient service in the app's service container.
