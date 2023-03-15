@@ -1,12 +1,14 @@
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
-{
-    //Customise web host to specify the application name and the root folder
-    Args = args,
-    ApplicationName = typeof(Program).Assembly.FullName,
-    ContentRootPath = Directory.GetCurrentDirectory(),
-    WebRootPath = "public"
-});
+var config = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("hostsettings.json", true, true)
+    .AddCommandLine(args)
+    .Build();
+
+var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("https://*.5000")
+    .UseConfiguration(config);
 var app = builder.Build();
+
 
 app.MapGet("/", () => "Hello World!");
 
