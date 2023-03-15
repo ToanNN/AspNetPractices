@@ -45,6 +45,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
 
+//he fallback authorization policy requires all users to be authenticated.
+//Endpoints such as controllers, Razor Pages, etc that specify their own authorization requirements don't use the fallback authorization policy.
 builder.Services.AddAuthorization(options =>
 {
     // By default, all incoming requests will be authorized according to the default policy.
@@ -69,6 +71,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// serve the default index file without its name
+var defaultFileOptions = new DefaultFilesOptions();
+defaultFileOptions.DefaultFileNames.Clear();
+defaultFileOptions.DefaultFileNames.Add("index.html");
+app.UseDefaultFiles(options: defaultFileOptions);
+
+
 app.UseStaticFiles();
 
 app.UseAuthentication();
@@ -122,10 +132,10 @@ app.UseRequestDecompression();
 app.UseConventionalMiddleware();
 app.UseFactoryBasedMiddleware();
 
-app.UseStaticFiles(new StaticFileOptions()
-{
-    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "OtherFolder")),
-    RequestPath = "/StaticFiles"
-});
+//app.UseStaticFiles(new StaticFileOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "OtherFolder")),
+//    RequestPath = "/StaticFiles"
+//});
 
 app.Run();
