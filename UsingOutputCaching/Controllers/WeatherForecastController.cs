@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using UsingOutputCaching.UsingConfigurations;
 
 namespace UsingOutputCaching.Controllers
 {
@@ -14,10 +16,12 @@ namespace UsingOutputCaching.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IOptions<PositionOptions> _options;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IOptions<PositionOptions> options)
         {
             _logger = logger;
+            _options = options;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]

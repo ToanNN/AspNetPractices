@@ -4,6 +4,7 @@ using Microsoft.Net.Http.Headers;
 using UsingOutputCaching.FactoryBasedMiddlewareActivation;
 using UsingOutputCaching.Middleware;
 using UsingOutputCaching.Middleware.ScopeServices;
+using UsingOutputCaching.UsingConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddResponseCaching(options =>
@@ -40,6 +41,8 @@ builder.Services.AddAuthorization(options =>
 
 // Once instance per injection
 builder.Services.AddTransient<FactoryActivatedMiddleware>();
+
+builder.Services.Configure<PositionOptions>(builder.Configuration.GetSection(PositionOptions.Position));
 
 
 //******************************************************************//

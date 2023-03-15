@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="Middleware\ScopeServices\" />
     <Folder Include="FactoryBasedMiddlewareActivation\" />
+    <Folder Include="UsingConfigurations\" />
   </ItemGroup>
 
 </Project>
