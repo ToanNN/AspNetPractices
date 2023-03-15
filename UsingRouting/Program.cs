@@ -33,4 +33,29 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.Use(async (context, next) =>
+{
+    var currentEndpoint = context.GetEndpoint();
+    if (currentEndpoint is null)
+    {
+        await next(context);
+        return;
+    }
+
+    Console.WriteLine($"Matched endpoint is {currentEndpoint.DisplayName}");
+
+    if (currentEndpoint is RouteEndpoint routeEndpoint)
+    {
+        Console.WriteLine($"    - Route Pattern: {routeEndpoint.RoutePattern.}");
+    }
+
+    foreach (var endpointMetadata in currentEndpoint.Metadata)
+    {
+        Console.WriteLine($"    - Metadata: {endpointMetadata}");
+    }
+
+    await next(context);
+});
+
+app.MapGet("/endpoint", () => "Inspecto");
 app.Run();
