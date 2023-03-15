@@ -59,6 +59,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RailWorkerService", "RailWorkerService\RailWorkerService.csproj", "{0C122CF1-588F-4FEC-90B1-44AB20F602AB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Routing", "Routing", "{086A3CA9-7927-4F40-BD59-98FE7398514E}"
+	ProjectSection(SolutionItems) = preProject
+		RoutingNotes.txt = RoutingNotes.txt
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingRouting", "UsingRouting\UsingRouting.csproj", "{69D3748B-0772-4F48-B261-BF44F2ACFC2B}"
 EndProject

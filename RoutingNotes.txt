@@ -1,0 +1,4 @@
+# Notes
+Don't use constraints for input validation. 
+If constraints are used for input validation, invalid input results in a 404 Not Found response. 
+Invalid input should produce a 400 Bad Request with an appropriate error message.

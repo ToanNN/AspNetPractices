@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+    .AddNegotiate();
 
 builder.Services.AddAuthorization(options =>
 {
@@ -27,9 +28,35 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+
+app.Use(async (context, next) =>
+{
+    var stopwatch = Stopwatch.StartNew();
+    await next(context);
+    stopwatch.Stop();
+    logger.LogInformation("Time 1: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+});
+
 app.UseHttpsRedirection();
+app.Use(async (context, next) =>
+{
+    var stopwatch = Stopwatch.StartNew();
+    await next(context);
+    stopwatch.Stop();
+
+    logger.LogInformation("Time 2: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+});
 
 app.UseAuthorization();
+app.Use(async (context, next) =>
+{
+    var stopwatch = Stopwatch.StartNew();
+    await next(context);
+    stopwatch.Stop();
+
+    logger.LogInformation("Time 3: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+});
 
 app.MapControllers();
 
@@ -46,7 +73,7 @@ app.Use(async (context, next) =>
 
     if (currentEndpoint is RouteEndpoint routeEndpoint)
     {
-        Console.WriteLine($"    - Route Pattern: {routeEndpoint.RoutePattern.}");
+        Console.WriteLine($"    - Route Pattern: {routeEndpoint.RoutePattern}");
     }
 
     foreach (var endpointMetadata in currentEndpoint.Metadata)
