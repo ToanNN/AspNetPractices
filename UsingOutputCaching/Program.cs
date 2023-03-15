@@ -1,5 +1,7 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Net.Http.Headers;
 using UsingOutputCaching.FactoryBasedMiddlewareActivation;
 using UsingOutputCaching.Middleware;
@@ -46,7 +48,7 @@ builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     // By default, all incoming requests will be authorized according to the default policy.
-    options.FallbackPolicy = options.DefaultPolicy;
+    options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 });
 
 // Once instance per injection
@@ -67,7 +69,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -117,5 +121,11 @@ app.UseRequestDecompression();
 //Register middleware with the request pipeline
 app.UseConventionalMiddleware();
 app.UseFactoryBasedMiddleware();
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.ContentRootPath, "OtherFolder")),
+    RequestPath = "/StaticFiles"
+});
 
 app.Run();
