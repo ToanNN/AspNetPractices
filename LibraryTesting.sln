@@ -65,6 +65,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Routing", "Routing", "{086A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingRouting", "UsingRouting\UsingRouting.csproj", "{69D3748B-0772-4F48-B261-BF44F2ACFC2B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HandlingErrors", "HandlingErrors", "{7A91723A-F4AA-4148-91BF-06414589A13A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandlingErrors", "HandlingErrors\HandlingErrors.csproj", "{E5C74235-197E-468A-A5EC-1AEDC1790112}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +147,10 @@ Global
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +173,7 @@ Global
 		{F7947D92-BBFA-404E-921E-C5B441B06F95} = {1D85906F-A7FA-4C65-AB95-BB6DDA579820}
 		{0C122CF1-588F-4FEC-90B1-44AB20F602AB} = {1D85906F-A7FA-4C65-AB95-BB6DDA579820}
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B} = {086A3CA9-7927-4F40-BD59-98FE7398514E}
+		{E5C74235-197E-468A-A5EC-1AEDC1790112} = {7A91723A-F4AA-4148-91BF-06414589A13A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F29CB1-138E-448C-B3DE-FFB25E7BB1C5}
