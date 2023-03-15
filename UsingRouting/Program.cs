@@ -1,5 +1,5 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using UsingRouting.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,33 +29,31 @@ if (app.Environment.IsDevelopment())
 }
 
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
-
+var timerCount = 0;
 app.Use(async (context, next) =>
 {
-    var stopwatch = Stopwatch.StartNew();
-    await next(context);
-    stopwatch.Stop();
-    logger.LogInformation("Time 1: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+    using (new AutoStopwatch(logger, $"Time {++timerCount}"))
+    {
+        await next(context);
+    }
 });
 
 app.UseHttpsRedirection();
 app.Use(async (context, next) =>
 {
-    var stopwatch = Stopwatch.StartNew();
-    await next(context);
-    stopwatch.Stop();
-
-    logger.LogInformation("Time 2: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+    using (new AutoStopwatch(logger, $"Time {++timerCount}"))
+    {
+        await next(context);
+    }
 });
 
 app.UseAuthorization();
 app.Use(async (context, next) =>
 {
-    var stopwatch = Stopwatch.StartNew();
-    await next(context);
-    stopwatch.Stop();
-
-    logger.LogInformation("Time 3: {ElapsedMilliseconds}ms", stopwatch.ElapsedMilliseconds);
+    using (new AutoStopwatch(logger, $"Time {++timerCount}"))
+    {
+        await next(context);
+    }
 });
 
 app.MapControllers();
