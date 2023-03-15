@@ -18,6 +18,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddRazorPages();
 
+builder.Services.AddProblemDetails(options =>
+    options.CustomizeProblemDetails = ctx => ctx.ProblemDetails.Extensions.Add("nodeId", Environment.MachineName));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
