@@ -7,6 +7,16 @@ using UsingOutputCaching.Middleware.ScopeServices;
 using UsingOutputCaching.UsingConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
+//Remove default logging providers
+//Console
+//Debug
+//EventSource
+//EventLog: Windows only
+builder.Logging.ClearProviders();
+
+//Add console loggin
+builder.Logging.AddConsole();
+
 builder.Services.AddResponseCaching(options =>
 {
     // 64kb default 64Mb
