@@ -63,11 +63,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Routing", "Routing", "{086A
 		RoutingNotes.txt = RoutingNotes.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingRouting", "UsingRouting\UsingRouting.csproj", "{69D3748B-0772-4F48-B261-BF44F2ACFC2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingRouting", "UsingRouting\UsingRouting.csproj", "{69D3748B-0772-4F48-B261-BF44F2ACFC2B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HandlingErrors", "HandlingErrors", "{7A91723A-F4AA-4148-91BF-06414589A13A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandlingErrors", "HandlingErrors\HandlingErrors.csproj", "{E5C74235-197E-468A-A5EC-1AEDC1790112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandlingErrors", "HandlingErrors\HandlingErrors.csproj", "{E5C74235-197E-468A-A5EC-1AEDC1790112}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MakingHttpRequests", "MakingHttpRequests", "{C9CDB6AE-39C8-40FB-B894-C654D4CF707C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingHttpRequests", "MakingHttpRequests\MakingHttpRequests.csproj", "{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +155,10 @@ Global
 		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C74235-197E-468A-A5EC-1AEDC1790112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,6 +182,7 @@ Global
 		{0C122CF1-588F-4FEC-90B1-44AB20F602AB} = {1D85906F-A7FA-4C65-AB95-BB6DDA579820}
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B} = {086A3CA9-7927-4F40-BD59-98FE7398514E}
 		{E5C74235-197E-468A-A5EC-1AEDC1790112} = {7A91723A-F4AA-4148-91BF-06414589A13A}
+		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7} = {C9CDB6AE-39C8-40FB-B894-C654D4CF707C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F29CB1-138E-448C-B3DE-FFB25E7BB1C5}
