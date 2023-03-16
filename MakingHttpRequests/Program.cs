@@ -32,7 +32,14 @@ builder.Services.AddHttpClient("GitHub", client =>
 // The instance is transient and has an instance of HttpClient injected in
 builder.Services.AddHttpClient<GitHubService>()
     // Keep the HttpMessageHandler instance for 5 minutes instead of 2 minutes (default)
-    .SetHandlerLifetime(TimeSpan.FromMinutes(5));
+    .SetHandlerLifetime(TimeSpan.FromMinutes(5))
+    //Configure the HttpMessageHandler
+    .ConfigurePrimaryHttpMessageHandler(()=> new HttpClientHandler()
+    {
+        AllowAutoRedirect = true,
+        UseDefaultCredentials = true,
+        UseCookies = true
+    });
 
 
 
