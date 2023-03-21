@@ -44,8 +44,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		notes.md = notes.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspnetIdentityFramwork", "AspnetIdentityFramwork", "{E9DCFFA3-2730-4B6F-96DF-1FFFA5AD06E9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{F0AC1762-9211-4F1A-980B-7B5B0D62E610}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RateLimitingInAction", "RateLimitingInAction\RateLimitingInAction.csproj", "{B6D59887-D75F-46E8-843F-A350BE97BA7D}"
@@ -71,7 +69,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandlingErrors", "HandlingE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MakingHttpRequests", "MakingHttpRequests", "{C9CDB6AE-39C8-40FB-B894-C654D4CF707C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingHttpRequests", "MakingHttpRequests\MakingHttpRequests.csproj", "{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MakingHttpRequests", "MakingHttpRequests\MakingHttpRequests.csproj", "{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingMinimalAPIs", "UsingMinimalAPIs\UsingMinimalAPIs.csproj", "{63ED73FC-1014-4CE7-B9CB-27071873F5F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MinimalAPis", "MinimalAPis", "{54936C26-7364-4F00-8287-76178D2C1D81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -159,6 +161,10 @@ Global
 		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63ED73FC-1014-4CE7-B9CB-27071873F5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63ED73FC-1014-4CE7-B9CB-27071873F5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63ED73FC-1014-4CE7-B9CB-27071873F5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63ED73FC-1014-4CE7-B9CB-27071873F5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -183,6 +189,7 @@ Global
 		{69D3748B-0772-4F48-B261-BF44F2ACFC2B} = {086A3CA9-7927-4F40-BD59-98FE7398514E}
 		{E5C74235-197E-468A-A5EC-1AEDC1790112} = {7A91723A-F4AA-4148-91BF-06414589A13A}
 		{FAAF5FA2-5A3F-4E5B-9C08-708F0497CBF7} = {C9CDB6AE-39C8-40FB-B894-C654D4CF707C}
+		{63ED73FC-1014-4CE7-B9CB-27071873F5F9} = {54936C26-7364-4F00-8287-76178D2C1D81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F29CB1-138E-448C-B3DE-FFB25E7BB1C5}
