@@ -112,4 +112,23 @@ app.MapPost("/register", async (HttpRequest req, Stream body, Channel<ReadOnlyMe
     return Results.StatusCode(StatusCodes.Status429TooManyRequests);
 });
 
+app.MapPost("/upload", async (IFormFile file) =>
+{
+    var tempFile = Path.GetTempFileName();
+    app.Logger.LogInformation("File uploaded: " + tempFile);
+
+    using var stream = File.OpenWrite(tempFile);
+    await file.CopyToAsync(stream);
+});
+
+app.MapPost("/upload_many", async (IFormFileCollection myFiles) =>
+{
+    foreach (var file in myFiles)
+    {
+        var tempFile = Path.GetTempFileName();
+        app.Logger.LogInformation(tempFile);
+        using var stream = File.OpenWrite(tempFile);
+        await file.CopyToAsync(stream);
+    }
+});
 app.Run();
