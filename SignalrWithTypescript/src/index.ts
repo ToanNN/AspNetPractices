@@ -23,6 +23,17 @@ connection.on("messageReceived", (username: string, message: string) => {
 
 connection.start().catch(err => document.write(err));
 
+connection.on("GetMessageFromClient",
+    async() => {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                    resolve("Here is your message");
+                },
+                100);
+        });
+        return promise;
+    });
+
 tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
     if (e.key === "Enter") {
         send();
@@ -33,5 +44,8 @@ btnSend.addEventListener("click", send);
 
 function send() {
     connection.send("newMessage", username, tbMessage.value)
-        .then(() => tbMessage.value = "");
+        .then(() => tbMessage.value = "")
+        .catch(function(err) {
+            console.error(err);
+        });
 }
