@@ -72,3 +72,18 @@ Use Kestrel or IIS Express as deployment targets.
 ### Windows Authentication
 However, to send messages to individual users, add a custom User ID provider. 
 The Windows authentication system doesn't provide the "Name Identifier" claim. SignalR uses the claim to determine the user name.
+
+## Cross origin
+Cross-origin resource sharing (CORS) can be used to allow cross-origin SignalR connections in the browser. 
+If JavaScript code is hosted on a different domain from the SignalR app, CORS middleware must be enabled to allow the JavaScript to connect to the SignalR app.
+Allow cross-origin requests only from domains you trust or control.
+
+Your site is hosted on http://www.example.com
+Your SignalR app is hosted on http://signalr.example.com
+CORS should be configured in the SignalR app to only allow the origin www.example.com.
+
+SignalR requires the following CORS policies:
+
+Allow the specific expected origins. Allowing any origin is possible but is not secure or recommended.
+HTTP methods GET and POST must be allowed.
+Credentials must be allowed in order for cookie-based sticky sessions to work correctly. They must be enabled even when authentication isn't used.

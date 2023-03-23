@@ -18,7 +18,11 @@ services.AddAuthorization(options =>
 });
 services.AddRazorPages();
 
-services.AddSignalR();
+
+services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = builder.Environment.IsDevelopment();
+});
 // extract Name claim instead of Name Identifier claim
 services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
 
@@ -34,6 +38,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Client code (javascript code) is hosted at https://example.com
+// SignalR backend code is hosted at https://signalr.example.com
+// Allow clients to call signalR hubs 
+
+app.UseCors(builder =>
+{
+    builder.WithOrigins("https://example.com")
+        .AllowAnyHeader()
+        .WithMethods("GET", "POST")
+        .AllowCredentials();
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
