@@ -1,5 +1,14 @@
 "use strict";
-var connection = new signalR.HubconnectionBuilder().withUrl("/chathub").build();
+var connection = new signalR.HubconnectionBuilder().withUrl("/chathub",
+    {
+        transport: signalR.HttpTransportType.WebSockets | signalR.HttpTransportType.LongPolling,
+        accessTokenFactory: () => {
+            // Get and return the access token.
+            // This function can return a JavaScript Promise if asynchronous
+            // logic is required to retrieve the access token.
+        },
+        keepAliveIntervalInMilliseconds: 30000
+    }).build();
 
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
