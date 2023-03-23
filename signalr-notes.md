@@ -67,3 +67,8 @@ When a client OS is used for development, we recommend:
 
 Avoid IIS.
 Use Kestrel or IIS Express as deployment targets.
+
+
+### Windows Authentication
+However, to send messages to individual users, add a custom User ID provider. 
+The Windows authentication system doesn't provide the "Name Identifier" claim. SignalR uses the claim to determine the user name.
