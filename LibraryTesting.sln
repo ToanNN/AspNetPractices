@@ -84,6 +84,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RealtimeApps", "RealtimeApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRWithJavascript", "SignalRWithJavascript\SignalRWithJavascript.csproj", "{253469B3-4D74-4294-A0AD-0B9EB3E56738}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRAuthenticationAndAuthorization", "SignalRAuthenticationAndAuthorization\SignalRAuthenticationAndAuthorization.csproj", "{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -182,6 +184,10 @@ Global
 		{253469B3-4D74-4294-A0AD-0B9EB3E56738}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{253469B3-4D74-4294-A0AD-0B9EB3E56738}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{253469B3-4D74-4294-A0AD-0B9EB3E56738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -210,6 +216,7 @@ Global
 		{63ED73FC-1014-4CE7-B9CB-27071873F5F9} = {54936C26-7364-4F00-8287-76178D2C1D81}
 		{57794EAB-E6CE-48C9-B40E-59C060EB4AF6} = {54936C26-7364-4F00-8287-76178D2C1D81}
 		{253469B3-4D74-4294-A0AD-0B9EB3E56738} = {FFF0E06C-F74F-4376-B738-091B6504E5C0}
+		{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA} = {FFF0E06C-F74F-4376-B738-091B6504E5C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F29CB1-138E-448C-B3DE-FFB25E7BB1C5}

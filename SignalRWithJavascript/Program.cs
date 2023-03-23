@@ -5,7 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddSignalR()
+builder.Services.AddSignalR(hubOptions =>
+    {
+        hubOptions.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+        hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(30);
+        hubOptions.MaximumParallelInvocationsPerClient = 16;
+    })
     .AddJsonProtocol(options =>
     {
         options.PayloadSerializerOptions.PropertyNamingPolicy = null;
