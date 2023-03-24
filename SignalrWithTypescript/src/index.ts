@@ -1,4 +1,5 @@
 import * as signalR from "@microsoft/signalr";
+import * as signalRMsgPack from "@microsoft/signalr-protocol-msgpack";
 
 import "./css/main.css";
 
@@ -10,6 +11,7 @@ const username = new Date().getTime();
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
+    .withHubProtocol(new signalRMsgPack.MessagePackHubProtocol())
     .build();
 
 connection.on("receiveMessage", (username: string, message: string) => {
@@ -43,7 +45,7 @@ tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
 btnSend.addEventListener("click", send);
 
 function send() {
-    connection.send("newMessage", username, tbMessage.value)
+    connection.send("NewMessage", username, tbMessage.value)
         .then(() => tbMessage.value = "")
         .catch(function(err) {
             console.error(err);

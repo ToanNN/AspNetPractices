@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var signalR = require("@microsoft/signalr");
+var signalRMsgPack = require("@microsoft/signalr-protocol-msgpack");
 require("./css/main.css");
 var divMessages = document.querySelector("#divMessages");
 var tbMessage = document.querySelector("#tbMessage");
@@ -44,6 +45,7 @@ var btnSend = document.querySelector("#btnSend");
 var username = new Date().getTime();
 var connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
+    .withHubProtocol(new signalRMsgPack.MessagePackHubProtocol())
     .build();
 connection.on("receiveMessage", function (username, message) {
     var m = document.createElement("div");
