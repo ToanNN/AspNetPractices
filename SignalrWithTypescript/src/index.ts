@@ -12,6 +12,7 @@ const username = new Date().getTime();
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
     .withHubProtocol(new signalRMsgPack.MessagePackHubProtocol())
+    .withAutomaticReconnect()
     .build();
 
 connection.on("receiveMessage", (username: string, message: string) => {
