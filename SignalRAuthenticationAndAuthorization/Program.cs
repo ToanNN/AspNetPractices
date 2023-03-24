@@ -1,8 +1,10 @@
+using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SignalRAuthenticationAndAuthorization.Data;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,33 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+builder.Services.AddSignalR().AddStackExchangeRedis(options =>
+{
+    options.Configuration.ChannelPrefix = "TnApp";
+
+    options.ConnectionFactory = async writer =>
+    {
+        var config = new ConfigurationOptions()
+        {
+            AbortOnConnectFail = false,
+        };
+        config.EndPoints.Add(IPAddress.Loopback, 0);
+        config.SetDefaultPorts();
+        var connection = await ConnectionMultiplexer.ConnectAsync(config, writer);
+        connection.ConnectionFailed += (_, e) =>
+        {
+            Console.WriteLine("Connection to Redis failed.");
+        };
+
+        if (!connection.IsConnected)
+        {
+            Console.WriteLine("Did not connect to Redis.");
+        }
+
+        return connection;
+    };
+});
 
 builder.Services.AddAuthentication(options =>
     {

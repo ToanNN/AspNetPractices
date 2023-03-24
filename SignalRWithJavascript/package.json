@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@microsoft/signalr-protocol-msgpack": "^7.0.4"
+  }
+}

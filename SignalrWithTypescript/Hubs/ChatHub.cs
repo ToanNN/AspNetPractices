@@ -8,7 +8,7 @@ namespace SignalrWithTypescript.Hubs;
 public class ChatHub : Hub<IChatClient>
 {
     // Change the name to a new name
-    [HubMethodName("SendMessageToAllConnectedClients")]
+    //[HubMethodName("SendMessageToAllConnectedClients")]
     public async Task NewMessage(string userName, string message) =>
         await Clients.All.ReceiveMessage(userName, message);
 

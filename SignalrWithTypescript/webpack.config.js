@@ -5,36 +5,33 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: "./src/index.ts",
-    // overrides the default value of dist and emit the result to wwwroot directory
     output: {
-        path: path.resolve(__direname, "wwwroot"),
-        filename="[name].[chunkhash].js",
-        publicPath: "/"
+        path: path.resolve(__dirname, "wwwroot"),
+        filename: "[name].[chunkhash].js",
+        publicPath: "/",
     },
-    //includes .js to import the SignalR client JavaScript.
     resolve: {
-        extensions:[".js", ".ts"]
+        extensions: [".js", ".ts"],
     },
     module: {
         rules: [
             {
                 test: /\.ts$/,
-                use:"ts-loader"
+                use: "ts-loader",
             },
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"]
-            }
-        ]
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+        ],
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: "./src/index.html"
+            template: "./src/index.html",
         }),
         new MiniCssExtractPlugin({
-            filename: "css/[name].[chunkhash].css"
-        })
-    ]
-
+            filename: "css/[name].[chunkhash].css",
+        }),
+    ],
 };

@@ -12,7 +12,7 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
     .build();
 
-connection.on("messageReceived", (username: string, message: string) => {
+connection.on("receiveMessage", (username: string, message: string) => {
     const m = document.createElement("div");
 
     m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
