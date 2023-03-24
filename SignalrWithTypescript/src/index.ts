@@ -11,11 +11,12 @@ const username = new Date().getTime();
 
 const connection = new signalR.HubConnectionBuilder()
     .withUrl("/hub")
-    .withHubProtocol(new signalRMsgPack.MessagePackHubProtocol())
+    //.withHubProtocol(new signalRMsgPack.MessagePackHubProtocol())
     .withAutomaticReconnect()
+    .configureLogging(signalR.LogLevel.Debug)
     .build();
 
-connection.on("receiveMessage", (username: string, message: string) => {
+connection.on("ReceiveMessage", (username: string, message: string) => {
     const m = document.createElement("div");
 
     m.innerHTML = `<div class="message-author">${username}</div><div>${message}</div>`;
@@ -46,7 +47,7 @@ tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
 btnSend.addEventListener("click", send);
 
 function send() {
-    connection.send("NewMessage", username, tbMessage.value)
+    connection.send("acceptMessages", username, tbMessage.value)
         .then(() => tbMessage.value = "")
         .catch(function(err) {
             console.error(err);

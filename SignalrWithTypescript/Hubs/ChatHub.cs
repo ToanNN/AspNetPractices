@@ -3,14 +3,15 @@ using SignalrWithTypescript.Services;
 
 namespace SignalrWithTypescript.Hubs;
 
-
 // Strongly typed clients to avoid strings as client method names
 public class ChatHub : Hub<IChatClient>
 {
     // Change the name to a new name
-    //[HubMethodName("SendMessageToAllConnectedClients")]
-    public async Task NewMessage(string userName, string message) =>
+    [HubMethodName("AcceptMessages")]
+    public async Task NewMessage(string userName, string message)
+    {
         await Clients.All.ReceiveMessage(userName, message);
+    }
 
     public async Task SendMessageToCaller(string user, string message, IDatabaseService databaseService)
     {
@@ -25,19 +26,19 @@ public class ChatHub : Hub<IChatClient>
         return message;
     }
 
-    public override async Task OnConnectedAsync()
-    {
-        await Groups.AddToGroupAsync(Context.ConnectionId, "SuperUserGroup");
-    }
+    //public override async Task OnConnectedAsync()
+    //{
+    //    await Groups.AddToGroupAsync(Context.ConnectionId, "SuperUserGroup");
+    //}
 
-    // Exception is not null when connection is interrupted
-    // null when Graceful disconnection
-    public override async Task OnDisconnectedAsync(Exception? exception)
-    {
-        //RemoveFromGroupAsync does not need to be called in OnDisconnectedAsync, it's automatically handled for you.
-        //await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SuperUserGroup");
-        await base.OnDisconnectedAsync(exception);
-    }
+    //// Exception is not null when connection is interrupted
+    //// null when Graceful disconnection
+    //public override async Task OnDisconnectedAsync(Exception? exception)
+    //{
+    //    //RemoveFromGroupAsync does not need to be called in OnDisconnectedAsync, it's automatically handled for you.
+    //    //await Groups.RemoveFromGroupAsync(Context.ConnectionId, "SuperUserGroup");
+    //    await base.OnDisconnectedAsync(exception);
+    //}
 }
 
 public interface IChatClient

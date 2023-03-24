@@ -1,18 +1,16 @@
-using System.Net;
 using MessagePack;
 using SignalrWithTypescript.Hubs;
 using SignalrWithTypescript.Services;
-using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSignalR()
+builder.Services.AddSignalR();
     // For .net client only
-    .AddMessagePackProtocol(options =>
-    {
-        options.SerializerOptions = MessagePackSerializerOptions.Standard
-            .WithSecurity(MessagePackSecurity.UntrustedData);
-    });
-    
+    //.AddMessagePackProtocol(options =>
+    //{
+    //    options.SerializerOptions = MessagePackSerializerOptions.Standard
+    //        .WithSecurity(MessagePackSecurity.UntrustedData);
+    //});
+
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 var app = builder.Build();
 
