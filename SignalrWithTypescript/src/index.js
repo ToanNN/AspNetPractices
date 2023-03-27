@@ -73,7 +73,7 @@ tbMessage.addEventListener("keyup", function (e) {
 });
 btnSend.addEventListener("click", send);
 function send() {
-    connection.send("AcceptMessages", username, tbMessage.value)
+    connection.send("acceptMessages", username, tbMessage.value)
         .then(function () { return tbMessage.value = ""; })
         .catch(function (err) {
         console.error(err);

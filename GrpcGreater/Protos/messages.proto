@@ -1,0 +1,20 @@
+syntax= "proto3";
+import "google/protobuf/duration.proto";  
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace ="GrpcGreter.Messages";
+
+message Person{
+	int32 id =1;
+	string first_name=2;
+	string last_name=3;
+	repeated string roles =4;
+}
+
+
+
+message Meeting {
+	string subject = 1;
+	google.protobuf.Timestamp start = 2;
+	google.protobuf.Duration duration = 3;
+}  

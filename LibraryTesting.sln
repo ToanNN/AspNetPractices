@@ -28,6 +28,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreater", "GrpcGreater\GrpcGreater.csproj", "{0A1A660D-5CA0-46CE-A978-CB6A9E19F396}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grpc", "Grpc", "{B88B9DB8-126C-471E-A708-9DE9B1E33EEB}"
+	ProjectSection(SolutionItems) = preProject
+		GrpcNotes.md = GrpcNotes.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{1D296D45-3406-4E45-B288-B37FC448D30E}"
 EndProject
@@ -84,9 +87,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RealtimeApps", "RealtimeApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRWithJavascript", "SignalRWithJavascript\SignalRWithJavascript.csproj", "{253469B3-4D74-4294-A0AD-0B9EB3E56738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRAuthenticationAndAuthorization", "SignalRAuthenticationAndAuthorization\SignalRAuthenticationAndAuthorization.csproj", "{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRAuthenticationAndAuthorization", "SignalRAuthenticationAndAuthorization\SignalRAuthenticationAndAuthorization.csproj", "{BFC1CC54-2B94-42A3-A4BF-C78B423E80DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingWindowsAuthenticationWithSignalR", "UsingWindowsAuthenticationWithSignalR\UsingWindowsAuthenticationWithSignalR.csproj", "{F6F47B96-FDAA-4F83-A72B-412C249707B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingWindowsAuthenticationWithSignalR", "UsingWindowsAuthenticationWithSignalR\UsingWindowsAuthenticationWithSignalR.csproj", "{F6F47B96-FDAA-4F83-A72B-412C249707B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
