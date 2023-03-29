@@ -91,6 +91,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRAuthenticationAndAut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsingWindowsAuthenticationWithSignalR", "UsingWindowsAuthenticationWithSignalR\UsingWindowsAuthenticationWithSignalR.csproj", "{F6F47B96-FDAA-4F83-A72B-412C249707B0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BestPractices", "BestPractices", "{6EDEE502-1B18-45DD-A552-03D99472C795}"
+	ProjectSection(SolutionItems) = preProject
+		BestPractices.md = BestPractices.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
